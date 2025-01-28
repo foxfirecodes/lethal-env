@@ -55,5 +55,6 @@ mkdir dev/BepInEx/config
 
 "$(dirname "$0")"/download-thunderstore.sh https://thunderstore.io/package/download/megumin/LethalDevMode/1.0.0/
 "$(dirname "$0")"/download-thunderstore.sh https://thunderstore.io/package/download/CTNOriginals/DevelopmentStartup/1.2.0/
+"$(dirname "$0")"/download-thunderstore.sh https://thunderstore.io/package/download/flerouwu/LC_FastStartup/1.1.2/
 
 echo "setup complete! run dev/start.sh to start the game with BepInEx"
