@@ -15,10 +15,5 @@ echo "downloading $url"
 curl --progress-bar -L "$url" -o "$download_zip"
 unzip -q "$download_zip" -d "$download_folder"
 
-mv "$download_folder"/*.dll ./dev/BepInEx/plugins/ 2>/dev/null || true
-mv "$download_folder"/plugins/* ./dev/BepInEx/plugins/ 2>/dev/null || true
-mv "$download_folder"/BepInEx/plugins/* ./dev/BepInEx/plugins/ 2>/dev/null || true
-
-mv "$download_folder"/*.cfg ./dev/BepInEx/config/ 2>/dev/null || true
-mv "$download_folder"/config/* ./dev/BepInEx/config/ 2>/dev/null || true
-mv "$download_folder"/BepInEx/config/* ./dev/BepInEx/config/ 2>/dev/null || true
+find "$download_folder" -name '*.dll' -exec mv {} ./BepInEx/plugins/ \;
+find "$download_folder" -name '*.cfg' -exec mv {} ./BepInEx/config/ \;
