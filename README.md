@@ -6,7 +6,7 @@ tl;dr i dont want to put files in my Lethal Company game directory, so i took so
 
 ## usage
 
-```
+```bash
 # clone the repo
 git clone https://github.com/foxfirecodes/lethal-env.git
 cd lethal-env
@@ -18,4 +18,10 @@ cd lethal-env
 ./dev/start.sh
 
 # feel free to add plugins to ./dev/BepInEx as needed for development!
+```
+
+to download mods from Thunderstore, copy the link from the `Manual Download` button and then run:
+
+```bash
+./download-thunderstore.sh <url>
 ```

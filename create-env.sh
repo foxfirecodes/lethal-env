@@ -46,19 +46,7 @@ echo "downloading mods"
 mkdir dev/BepInEx/plugins
 mkdir dev/BepInEx/config
 
-mod_dl_dir="$(mktemp -d)"
-cd "$mod_dl_dir"
-
-curl -L -o DevelopmentStartup.zip https://github.com/CTNOriginals/LethalCompany-DevelopmentStartup/releases/download/1.2.0/DevelopmentStartup1.2.0.zip
-curl -L -o LethalDevMode.zip https://thunderstore.io/package/download/megumin/LethalDevMode/1.0.0/
-
-unzip DevelopmentStartup.zip -d ./DevelopmentStartup
-unzip LethalDevMode.zip -d ./LethalDevMode
-
-cd -
-cp "$mod_dl_dir/DevelopmentStartup/BepInEx/plugins/DevelopmentStartup.dll" ./dev/BepInEx/plugins/
-cp "$mod_dl_dir/DevelopmentStartup/BepInEx/config/DevelopmentStartup.cfg" ./dev/BepInEx/config/
-cp "$mod_dl_dir/LethalDevMode/plugins/LethalDevMode.dll" ./dev/BepInEx/plugins/
-
+"$(dirname "$0")"/download-thunderstore.sh https://thunderstore.io/package/download/megumin/LethalDevMode/1.0.0/
+"$(dirname "$0")"/download-thunderstore.sh https://thunderstore.io/package/download/CTNOriginals/DevelopmentStartup/1.2.0/
 
 echo "setup complete! run dev/start.sh to start the game with BepInEx"
