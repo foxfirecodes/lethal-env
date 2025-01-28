@@ -1,12 +1,14 @@
 #!/bin/bash
 
-set -ex
+# fail on error
+set -e
 
 if [ -d dev ]; then
   echo "dev directory already exists" >&1
   exit 1
 fi
 
+echo "detecting Lethal Company.exe location..."
 lethal_exe_path=$(protontricks --cwd-app -c 'realpath "Lethal Company.exe"' 1966720 2>/dev/null)
 
 if [ -z "$lethal_exe_path" ]; then
@@ -21,8 +23,8 @@ download_path="/tmp/bepinex.zip"
 if [ -f "$download_path" ]; then
   echo "BepInEx already downloaded, skipping..."
 else
-  echo "downloading BepInEx"
-  curl -L https://github.com/BepInEx/BepInEx/releases/download/v5.4.22/BepInEx_x64_5.4.22.0.zip -o "$download_path"
+  echo "downloading BepInEx..."
+  curl --progress-bar -L https://github.com/BepInEx/BepInEx/releases/download/v5.4.22/BepInEx_x64_5.4.22.0.zip -o "$download_path"
 fi
 
 echo "setting up dev dir"
@@ -34,9 +36,14 @@ echo "creating start.sh"
 # Create start.sh script
 cat > dev/start.sh << EOF
 #!/bin/bash
+
 cd "\$(dirname "\$0")"
-protontricks-launch --appid 1966720 "$lethal_exe_path" --doorstop-enable true \\
---doorstop-target "Z:\$(realpath ./BepInEx/core/BepInEx.Preloader.dll)"
+
+WINEDEBUG="fixme-all" protontricks-launch \\
+  --appid 1966720 \\
+  "$lethal_exe_path" \\
+  --doorstop-enable true \\
+  --doorstop-target "Z:\$(realpath ./BepInEx/core/BepInEx.Preloader.dll)"
 EOF
 chmod +x dev/start.sh
 
